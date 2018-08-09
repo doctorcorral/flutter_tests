@@ -10,7 +10,14 @@ class AppVergas extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "medium clap",
-      home: ClapWidgetImg(),
+      home: Container(
+          padding: EdgeInsets.all(50.0),
+          color: Colors.grey.shade300,
+          child: Center(
+              child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[ClapWidget(), ClapWidgetImg()],
+          ))),
     );
   }
 }
@@ -22,12 +29,12 @@ class ClapWidget extends StatelessWidget {
       child: ClapFAB.icon(
         defaultIcon: FontAwesomeIcons.heart,
         filledIcon: FontAwesomeIcons.solidHeart,
-        countCircleColor: Colors.green,
-        defaultIconColor: Colors.green,
+        countCircleColor: Colors.purpleAccent,
+        defaultIconColor: Colors.purple,
         hasShadow: true,
-        sparkleColor: Colors.green,
-        shadowColor: Colors.green,
-        filledIconColor: Colors.green,
+        sparkleColor: Colors.deepPurple,
+        shadowColor: Colors.grey.shade600,
+        filledIconColor: Colors.purple,
       ),
     );
   }
