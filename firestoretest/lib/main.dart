@@ -16,17 +16,24 @@ class ModelList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10.0),
-      color: Colors.white10,
+      color: Colors.blueGrey,
       child: StreamBuilder(
           stream: Firestore.instance.collection('modelsmetainfo').snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return Text("cargando...");
+            if (!snapshot.hasData) {
+              print("${snapshot.data.documents[0]}");
+              return Text("cargando...");
+            }
             return ListView.builder(
-              itemExtent: 80.0,
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (context, i) => Text("$snapshot.data.documents[i]"),
-            );
+                itemExtent: 80.0,
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, i) =>
+                    _buildListItem(context, snapshot.data.documents[i]));
           }),
     );
+  }
+
+  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    return Card(child: Text(document['name']));
   }
 }
