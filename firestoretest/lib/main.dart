@@ -34,6 +34,29 @@ class ModelList extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-    return Card(child: Text(document['name']));
+    // return Card(child: Text(document['name']));
+    return Container(
+      height: 124.0,
+      margin: EdgeInsets.all(3.0),
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8.0,
+            offset: Offset(0.0, 5.0),
+          )
+        ],
+      ),
+      child: Container(
+          margin: EdgeInsets.all(5.0),
+          child: Text(document['name'],
+              style: TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w200))),
+    );
   }
 }
