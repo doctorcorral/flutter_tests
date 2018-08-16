@@ -20,6 +20,9 @@ class ModelList extends StatelessWidget {
       child: StreamBuilder(
           stream: Firestore.instance.collection('modelsmetainfo').snapshots(),
           builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print(snapshot.error.toString());
+            }
             if (!snapshot.hasData) {
               print("${snapshot.data.documents[0]}");
               return Text("cargando...");
