@@ -46,8 +46,8 @@ class Screen3 extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 RaisedButton(
                   onPressed: () => button2(context),
@@ -85,7 +85,25 @@ class Screen2 extends StatelessWidget {
 
 void button1(BuildContext context) {
   print("Button 1"); //1
-  Navigator.of(context).pushNamed('/screen2'); //2
+  //Navigator.of(context).pushNamed('/screen2'); //2
+  Navigator.of(context).push(PageRouteBuilder(
+      opaque: true,
+      // 2
+      transitionDuration: const Duration(milliseconds: 1000),
+      // 3
+      pageBuilder: (BuildContext context, _, __) {
+        return Screen3();
+      },
+      // 4
+      transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+        return new FadeTransition(
+          opacity: animation,
+          child: new RotationTransition(
+            turns: new Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+            child: child,
+          ),
+        );
+      }));
 }
 
 void button2(BuildContext context) {
