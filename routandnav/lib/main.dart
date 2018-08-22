@@ -42,6 +42,7 @@ class Screen3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.redAccent,
           title: Text("Scrin 3"),
         ),
         body: Center(
@@ -86,20 +87,18 @@ class Screen2 extends StatelessWidget {
 void button1(BuildContext context) {
   print("Button 1"); //1
   //Navigator.of(context).pushNamed('/screen2'); //2
+
   Navigator.of(context).push(PageRouteBuilder(
       opaque: true,
-      // 2
-      transitionDuration: const Duration(milliseconds: 1000),
-      // 3
+      transitionDuration: const Duration(milliseconds: 500),
       pageBuilder: (BuildContext context, _, __) {
         return Screen3();
       },
-      // 4
       transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
-        return new FadeTransition(
+        return FadeTransition(
           opacity: animation,
-          child: new RotationTransition(
-            turns: new Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+          child: RotationTransition(
+            turns: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
             child: child,
           ),
         );
