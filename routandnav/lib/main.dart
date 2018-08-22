@@ -97,8 +97,9 @@ void button1(BuildContext context) {
       transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
         return FadeTransition(
           opacity: animation,
-          child: RotationTransition(
-            turns: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+          child: ScaleTransition(
+            // turns: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
+            scale: Tween<double>(begin: 0.0, end: 1.0).animate(animation),
             child: child,
           ),
         );
