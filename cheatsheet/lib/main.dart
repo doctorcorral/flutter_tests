@@ -16,7 +16,7 @@ class App extends StatelessWidget {
 Widget appBody() {
   return Scaffold(
       body: SafeArea(
-    child: rowTestSpaceBetween(),
+    child: rowTestSpaceEvenly(),
   ));
 }
 
@@ -34,6 +34,17 @@ Widget rowTest() {
 Widget rowTestSpaceBetween() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      new Icon(Icons.star, size: 50.0),
+      new Icon(Icons.star, size: 50.0),
+      new Icon(Icons.star, size: 50.0),
+    ],
+  );
+}
+
+Widget rowTestSpaceEvenly() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: <Widget>[
       new Icon(Icons.star, size: 50.0),
       new Icon(Icons.star, size: 50.0),
