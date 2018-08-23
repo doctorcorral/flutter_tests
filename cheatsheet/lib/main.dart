@@ -16,13 +16,28 @@ class App extends StatelessWidget {
 Widget appBody() {
   return Scaffold(
       body: SafeArea(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        new Icon(Icons.star, size: 50.0),
-        new Icon(Icons.star, size: 50.0),
-        new Icon(Icons.star, size: 50.0),
-      ],
-    ),
+    child: rowTestSpaceBetween(),
   ));
+}
+
+Widget rowTest() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: <Widget>[
+      new Icon(Icons.star, size: 50.0),
+      new Icon(Icons.star, size: 50.0),
+      new Icon(Icons.star, size: 50.0),
+    ],
+  );
+}
+
+Widget rowTestSpaceBetween() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      new Icon(Icons.star, size: 50.0),
+      new Icon(Icons.star, size: 50.0),
+      new Icon(Icons.star, size: 50.0),
+    ],
+  );
 }
