@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cheatsheet/widgets.dart';
 
 void main() => runApp(new App());
 
@@ -18,37 +19,4 @@ Widget appBody() {
       body: SafeArea(
     child: rowTestSpaceEvenly(),
   ));
-}
-
-Widget rowTest() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: <Widget>[
-      new Icon(Icons.star, size: 50.0),
-      new Icon(Icons.star, size: 50.0),
-      new Icon(Icons.star, size: 50.0),
-    ],
-  );
-}
-
-Widget rowTestSpaceBetween() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: <Widget>[
-      new Icon(Icons.star, size: 50.0),
-      new Icon(Icons.star, size: 50.0),
-      new Icon(Icons.star, size: 50.0),
-    ],
-  );
-}
-
-Widget rowTestSpaceEvenly() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: <Widget>[
-      new Icon(Icons.star, size: 50.0),
-      new Icon(Icons.star, size: 50.0),
-      new Icon(Icons.star, size: 50.0),
-    ],
-  );
 }
