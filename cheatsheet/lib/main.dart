@@ -9,14 +9,17 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       color: Colors.grey,
-      home: appBody(),
+      home: appBody(context),
     );
   }
 }
 
-Widget appBody() {
+Widget appBody(BuildContext context) {
   return Scaffold(
       body: SafeArea(
-    child: rowTestSpaceEvenly(),
+    child: Container(
+      color: Colors.amber,
+      child: botones(),
+    ),
   ));
 }
