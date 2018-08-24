@@ -66,11 +66,36 @@ Widget rowTestText(BuildContext context) {
 
 Widget rowTestSizes() {
   return Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //mainAxisSize: MainAxisSize.min,
     children: <Widget>[
       new Icon(Icons.star, size: 50.0),
       new Icon(Icons.star, size: 200.0),
       new Icon(Icons.star, size: 50.0),
     ],
+  );
+}
+
+Widget botones() {
+  return Center(
+    child: IntrinsicWidth(
+      child: Column(
+        children: <Widget>[
+          RaisedButton(
+            onPressed: () {},
+            child: Text('Short'),
+          ),
+          RaisedButton(
+            onPressed: () {},
+            child: Text('A bit Longer'),
+          ),
+          RaisedButton(
+            onPressed: () {},
+            child: Text('The Longest text button'),
+          ),
+        ],
+      ),
+    ),
   );
 }
