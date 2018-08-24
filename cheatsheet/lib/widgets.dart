@@ -81,6 +81,7 @@ Widget botones() {
   return Center(
     child: IntrinsicWidth(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           RaisedButton(
             onPressed: () {},
