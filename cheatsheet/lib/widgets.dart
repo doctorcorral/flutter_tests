@@ -109,19 +109,22 @@ Widget stacks() {
         appBar: AppBar(title: Text('Stack')),
       ),
       Banner(
-        message: "Top Start",
+        message: "RCC",
         location: BannerLocation.topStart,
       ),
       Banner(
+        color: Colors.blueAccent,
         message: "Top End",
         location: BannerLocation.topEnd,
       ),
       Banner(
         message: "Bottom Start",
+        color: Colors.blueGrey,
         location: BannerLocation.bottomStart,
       ),
       Banner(
         message: "Bottom End",
+        color: Colors.deepOrangeAccent,
         location: BannerLocation.bottomEnd,
       ),
     ],
