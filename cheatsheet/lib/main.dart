@@ -16,10 +16,11 @@ class App extends StatelessWidget {
 
 Widget appBody(BuildContext context) {
   return Scaffold(
+      // appBar: AppBar(title: Text('Stacks')),
       body: SafeArea(
     child: Container(
       color: Colors.amber,
-      child: botones(),
+      child: stacks(),
     ),
   ));
 }
