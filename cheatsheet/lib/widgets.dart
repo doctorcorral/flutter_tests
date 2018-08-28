@@ -130,3 +130,28 @@ Widget stacks() {
     ],
   );
 }
+
+Widget positioned() {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Stack'),
+      backgroundColor: Colors.white12,
+    ),
+    body: Stack(
+      fit: StackFit.expand,
+      children: <Widget>[
+        Material(color: Colors.grey),
+        Positioned(
+          top: 0.0,
+          left: 0.0,
+          child: Icon(Icons.star, size: 50.0),
+        ),
+        Positioned(
+          top: 340.0,
+          left: 250.0,
+          child: Icon(Icons.call, size: 50.0),
+        ),
+      ],
+    ),
+  );
+}
