@@ -16,11 +16,11 @@ class App extends StatelessWidget {
 
 Widget appBody(BuildContext context) {
   return Scaffold(
-      // appBar: AppBar(title: Text('Stacks')),
+      appBar: AppBar(title: Text('👅'), backgroundColor: Colors.white70),
       body: SafeArea(
-    child: Container(
-      color: Colors.amber,
-      child: positioned(),
-    ),
-  ));
+        child: Container(
+          color: Colors.amber,
+          child: expanded1(),
+        ),
+      ));
 }
