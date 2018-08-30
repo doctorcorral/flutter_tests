@@ -204,3 +204,13 @@ Widget expanded1() {
     ],
   );
 }
+
+Widget consbox1() {
+  return ConstrainedBox(
+    constraints: BoxConstraints.expand(),
+    child: const Card(
+      child: const Text('Hello World!'),
+      color: Colors.lightGreen,
+    ),
+  );
+}
