@@ -257,3 +257,12 @@ Widget transform1() {
     ),
   );
 }
+
+Widget sizedbox1() {
+  return SizedBox.expand(
+    child: Card(
+      child: Text('sup'),
+      color: Colors.green[50],
+    ),
+  );
+}

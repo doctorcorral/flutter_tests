@@ -20,7 +20,7 @@ Widget appBody(BuildContext context) {
       body: SafeArea(
         child: Container(
           color: Colors.amber,
-          child: container2(),
+          child: sizedbox1(),
         ),
       ));
 }
