@@ -279,3 +279,10 @@ Widget sizedbox2() {
     ],
   );
 }
+
+Widget sizedbox3() {
+  bool isVisible = true;
+  return Container(
+    child: isVisible ? Icon(Icons.star, size: 150.0) : const SizedBox(),
+  );
+}
