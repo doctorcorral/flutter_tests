@@ -19,8 +19,8 @@ Widget appBody(BuildContext context) {
       appBar: AppBar(title: Text('👅'), backgroundColor: Colors.white70),
       body: SafeArea(
         child: Container(
-          color: Colors.amber,
-          child: sizedbox1(),
+          color: Colors.amber[100],
+          child: sizedbox2(),
         ),
       ));
 }

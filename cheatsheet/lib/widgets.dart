@@ -266,3 +266,16 @@ Widget sizedbox1() {
     ),
   );
 }
+
+Widget sizedbox2() {
+  return Column(
+    children: <Widget>[
+      Icon(Icons.star, size: 50.0),
+      const SizedBox(
+        height: 100.0,
+      ),
+      Icon(Icons.star, size: 50.0),
+      Icon(Icons.star, size: 50.0)
+    ],
+  );
+}
