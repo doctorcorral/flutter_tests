@@ -16,19 +16,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return SplashScreen(
-        seconds: 14,
-        navigateAfterSeconds: new AfterSplash(),
-        title: new Text(
-          'Welcome In SplashScreen',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-        ),
-        image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        onClick: () => print("Flutter Egypt"),
-        loaderColor: Colors.red);
+    return new SplashScreen(
+      seconds: 14,
+      navigateAfterSeconds: new AfterSplash(),
+      title: new Text(
+        'Welcome In SplashScreen',
+        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+      ),
+      image: new Image.network(
+          'https://flutter.io/images/catalog-widget-placeholder.png'),
+      backgroundColor: Colors.white,
+      styleTextUnderTheLoader: new TextStyle(),
+      photoSize: 100.0,
+      onClick: () => print("Flutter Egypt"),
+      loaderColor: Colors.green,
+    );
   }
 }
 
@@ -37,8 +39,9 @@ class AfterSplash extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-          title: new Text("Welcome In SplashScreen Package"),
-          automaticallyImplyLeading: false),
+        title: new Text("Welcome In SplashScreen Package"),
+        automaticallyImplyLeading: false,
+      ),
       body: new Center(
         child: new Text(
           "Succeeded!",
