@@ -28,7 +28,7 @@ class MovieList extends StatelessWidget {
     return GridView.builder(
         itemCount: snapshot.data.results.length,
         gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (BuildContext context, int index) {
           return Image.network(
             'https://image.tmdb.org/t/p/w185${snapshot.data
