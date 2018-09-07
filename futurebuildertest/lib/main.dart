@@ -44,7 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                    ));
                   default:
                     return Center(child: Text(snapshot.data));
                 }
@@ -54,8 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _fetchData() async {
+  _fetchData0() async {
     await Future.delayed(Duration(seconds: 2));
     return 'REMOTE DATA';
+  }
+
+  _fetchData() {
+    final AsyncMemoizer _memoizer = AsyncMemoizer();
+    return this._memoizer.runOnce(() async {
+      await Future.delayed(Duration(seconds: 2));
+      return 'REMOTE DATA';
+    });
   }
 }
