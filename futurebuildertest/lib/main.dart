@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:async/async.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _switchValue;
-
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
   @override
   void initState() {
     super.initState();
@@ -63,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _fetchData() {
-    final AsyncMemoizer _memoizer = AsyncMemoizer();
     return this._memoizer.runOnce(() async {
       await Future.delayed(Duration(seconds: 2));
       return 'REMOTE DATA';
