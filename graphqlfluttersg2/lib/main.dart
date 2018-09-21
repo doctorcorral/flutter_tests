@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       uri: 'https://production.suggestic.com/graphql',
       headers: <String, String>{
         'Authorization':
-            'Bearer ',
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkZGJlZWRhMi1kYWQwLTQxZjMtOWVhZi1hM2IzMzcxMTM3OGMiLCJpc3MiOiJzZzphcHAiLCJwaWQiOiI5NGY3ZjY3OS05OWUyLTQ4NTYtODU2Yy0yZDM2ZDY2YjcyOTYiLCJjYXQiOiIyMDE4MDgzMTE4MDMiLCJleHAiOjE1Mzg1MTg1NjAsImlhdCI6MTUzNzMwODk2MCwiYXVkIjoic2c6dXNlciJ9.t1qpEeAz0bav5XUAq6NlnLm2YWMZYzy3JsX1YZcnNb4',
       },
     );
 
@@ -93,52 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Query _query;
 
-  Query _getQuery(String querystring) {
-    String _sq = squeries.autocomplete.replaceFirst("querystring", querystring);
-    print(_sq);
-    return Query(
-      options: QueryOptions(
-        document: _sq, // this is the query string you just created
-        variables: {
-          'querystring': querystring,
-        },
-        pollInterval: 10,
-      ),
-      builder: (QueryResult result) {
-        if (result.errors != null) {
-          return Text(result.errors.toString());
-        }
 
-        if (result.loading) {
-          return Text('Loading...🕓');
-        }
-
-        // it can be either Map or List
-        List foodItems = result.data['outocomplete']['edges'];
-
-        return ListView.builder(
-            padding: EdgeInsets.all(5.0),
-            itemCount: foodItems.length,
-            itemBuilder: (context, index) {
-              final foodItem = foodItems[index];
-              return Container(
-                padding: EdgeInsets.all(10.0),
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(foodItem['node']['name'],
-                        style: TextStyle(fontWeight: FontWeight.w700)),
-                    Text("Carbs: ${foodItem['node']['nutrients']['chocdf']} %"),
-                  ],
-                ),
-              );
-
-              ;
-            });
-      },
-    );
-  }
 
   @override
   void initState() {
@@ -220,6 +175,62 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: buildAppBar(context),
       body: SafeArea(child: _query, minimum: EdgeInsets.all(15.0)),
       backgroundColor: Colors.white10,
+    );
+  }
+}
+
+
+class _GetQuery extends StatefulWidget {
+  __GetQueryState createState() => __GetQueryState();
+}
+
+class __GetQueryState extends State<_GetQuery> {
+  @override
+  Widget build(BuildContext context) {
+    String querystring = "Salmon";
+    String _sq = squeries.autocomplete.replaceFirst("querystring", querystring);
+    print(_sq);
+    return  Query(
+      options: QueryOptions(
+        document: _sq, // this is the query string you just created
+        variables: {
+          'querystring': querystring,
+        },
+        pollInterval: 10,
+      ),
+      builder: (QueryResult result) {
+        if (result.errors != null) {
+          return Text(result.errors.toString());
+        }
+
+        if (result.loading) {
+          return Text('Loading...🕓');
+        }
+
+        // it can be either Map or List
+        List foodItems = result.data['outocomplete']['edges'];
+
+        return ListView.builder(
+            padding: EdgeInsets.all(5.0),
+            itemCount: foodItems.length,
+            itemBuilder: (context, index) {
+              final foodItem = foodItems[index];
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(foodItem['node']['name'],
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("Carbs: ${foodItem['node']['nutrients']['chocdf']} %"),
+                  ],
+                ),
+              );
+
+              ;
+            });
+      },
     );
   }
 }
