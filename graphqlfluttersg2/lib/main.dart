@@ -3,8 +3,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 import './queries/searchAutocomplete.dart' as squeries;
 
-import 'dart:async';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -57,19 +55,20 @@ class _MyHomePageState extends State<MyHomePage> {
   String _searchText = "salmon";
   String get searchText => _searchText;
 
-  Widget appBarTitle = new Text(
+  Widget appBarTitle =  Text(
     "Food search 🍔",
-    style: new TextStyle(color: Colors.white),
+    style:  TextStyle(color: Colors.white),
   );
 
-  Icon icon = new Icon(
+  Icon icon =  Icon(
     Icons.search,
     color: Colors.white,
   );
   final globalKey = GlobalKey<ScaffoldState>();
-  final TextEditingController _controller = new TextEditingController();
+  final TextEditingController _controller =  TextEditingController();
   bool _isSearching;
-  List searchresult = new List();
+  List searchresult =  List();
+  _GetQuery _query;
 
   _MyHomePageState() {
     print('$searchText');
@@ -85,21 +84,17 @@ class _MyHomePageState extends State<MyHomePage> {
           _isSearching = true;
           _searchText = _controller.text;
           print('searchText: $searchText');
-          _query = _getQuery(_searchText);
         });
       }
     });
   }
-
-  Query _query;
-
 
 
   @override
   void initState() {
     super.initState();
     _isSearching = false;
-    _query = _getQuery(_searchText);
+    _query = _GetQuery();
   }
 
   Widget buildAppBar(BuildContext context) {
@@ -141,13 +136,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void _handleSearchStart() {
     setState(() {
       _isSearching = true;
-      _query = _getQuery(_searchText);
+      
+     // _query = _getQuery(_searchText);
     });
   }
 
   void _handleSearchEnd() {
     setState(() {
-      _query = _getQuery(_searchText);
+      //_query = _getQuery(_searchText);
       this.icon = new Icon(
         Icons.search,
         color: Colors.white,
@@ -165,7 +161,9 @@ class _MyHomePageState extends State<MyHomePage> {
     searchresult.clear();
     _searchText = searchText;
     if (_isSearching != null) {
-      _query = _getQuery(_searchText);
+      //_query = _getQuery(_searchText);
+     // _query.createState();
+      print("searching...");
     }
   }
 
@@ -185,16 +183,33 @@ class _GetQuery extends StatefulWidget {
 }
 
 class __GetQueryState extends State<_GetQuery> {
+  static String _querystring = "Salmon";
+  static String get querystring => _querystring;
+  String _sq = squeries.autocomplete.replaceFirst("querystring", querystring);
+
+ // @override
+    //void setState(fn) {
+      // TODO: implement setState
+     // super.setState(fn);
+      //_querystring = fn as String;
+      //_sq = squeries.autocomplete.replaceFirst("querystring", _querystring);
+
+    //}
+
+  void setSearchTerm(String qs ) {
+    setState((){
+      _querystring = qs;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    String querystring = "Salmon";
-    String _sq = squeries.autocomplete.replaceFirst("querystring", querystring);
     print(_sq);
     return  Query(
       options: QueryOptions(
         document: _sq, // this is the query string you just created
         variables: {
-          'querystring': querystring,
+          'querystring': _querystring,
         },
         pollInterval: 10,
       ),
