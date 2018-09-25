@@ -1,6 +1,6 @@
 String  autocomplete = """
 {
-    outocomplete(query: "apple", mealType: RECIPE) {
+    outocomplete(query:  "querystring", mealType: RECIPE) {
     edges {
       node {
         name
