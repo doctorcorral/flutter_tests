@@ -52,7 +52,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _searchText = "salmon";
+  String _searchText = "ham";
   String get searchText => _searchText;
 
   Widget appBarTitle =  Text(
@@ -68,7 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _controller =  TextEditingController();
   bool _isSearching;
   List searchresult =  List();
-  _GetQuery _query;
+  String _sq;
+  Query _query;
 
   _MyHomePageState() {
     print('$searchText');
@@ -83,7 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           _isSearching = true;
           _searchText = _controller.text;
+          _sq = squeries.autocomplete.replaceFirst("querystring", _searchText);
           print('searchText: $searchText');
+          print('_sq: $_sq');
+          
+          print('_query string: ${_query.toStringShallow()}');
+
         });
       }
     });
@@ -94,7 +100,51 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _isSearching = false;
-    _query = _GetQuery();
+
+    _sq = squeries.autocomplete.replaceFirst("querystring", "hamburger");
+
+    _query = Query(
+      options: QueryOptions(
+        document: squeries.autocomplete, // this is the query string you just created
+        variables: {
+          'querystring': _searchText,
+        },
+        pollInterval: 10,
+      ),
+      builder: (QueryResult result) {
+        if (result.errors != null) {
+          return Text(result.errors.toString());
+        }
+
+        if (result.loading) {
+          return Text('Loading...🕓');
+        }
+
+        // it can be either Map or List
+        List foodItems = result.data['outocomplete']['edges'];
+
+        return ListView.builder(
+            padding: EdgeInsets.all(5.0),
+            itemCount: foodItems.length,
+            itemBuilder: (context, index) {
+              final foodItem = foodItems[index];
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(foodItem['node']['name'],
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("Carbs: ${foodItem['node']['nutrients']['chocdf']} %"),
+                  ],
+                ),
+              );
+
+              ;
+            });
+      },
+    );
   }
 
   Widget buildAppBar(BuildContext context) {
@@ -136,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _handleSearchStart() {
     setState(() {
       _isSearching = true;
-      
+      //_query.setSearchTerm();
      // _query = _getQuery(_searchText);
     });
   }
@@ -172,80 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: buildAppBar(context),
       body: SafeArea(child: _query, minimum: EdgeInsets.all(15.0)),
-      backgroundColor: Colors.white10,
-    );
-  }
-}
-
-
-class _GetQuery extends StatefulWidget {
-  __GetQueryState createState() => __GetQueryState();
-}
-
-class __GetQueryState extends State<_GetQuery> {
-  static String _querystring = "Salmon";
-  static String get querystring => _querystring;
-  String _sq = squeries.autocomplete.replaceFirst("querystring", querystring);
-
- // @override
-    //void setState(fn) {
-      // TODO: implement setState
-     // super.setState(fn);
-      //_querystring = fn as String;
-      //_sq = squeries.autocomplete.replaceFirst("querystring", _querystring);
-
-    //}
-
-  void setSearchTerm(String qs ) {
-    setState((){
-      _querystring = qs;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print(_sq);
-    return  Query(
-      options: QueryOptions(
-        document: _sq, // this is the query string you just created
-        variables: {
-          'querystring': _querystring,
-        },
-        pollInterval: 10,
-      ),
-      builder: (QueryResult result) {
-        if (result.errors != null) {
-          return Text(result.errors.toString());
-        }
-
-        if (result.loading) {
-          return Text('Loading...🕓');
-        }
-
-        // it can be either Map or List
-        List foodItems = result.data['outocomplete']['edges'];
-
-        return ListView.builder(
-            padding: EdgeInsets.all(5.0),
-            itemCount: foodItems.length,
-            itemBuilder: (context, index) {
-              final foodItem = foodItems[index];
-              return Container(
-                padding: EdgeInsets.all(10.0),
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(foodItem['node']['name'],
-                        style: TextStyle(fontWeight: FontWeight.w700)),
-                    Text("Carbs: ${foodItem['node']['nutrients']['chocdf']} %"),
-                  ],
-                ),
-              );
-
-              ;
-            });
-      },
+      backgroundColor: Colors.white,
     );
   }
 }
