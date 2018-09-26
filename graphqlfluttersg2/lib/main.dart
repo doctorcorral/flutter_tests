@@ -89,23 +89,9 @@ class _MyHomePageState extends State<MyHomePage> {
           print('_sq: $_sq');
           
           print('_query string: ${_query.toStringShallow()}');
-
-        });
-      }
-    });
-  }
-
-
-  @override
-  void initState() {
-    super.initState();
-    _isSearching = false;
-
-    _sq = squeries.autocomplete.replaceFirst("querystring", "hamburger");
-
-    _query = Query(
+          _query = Query(
       options: QueryOptions(
-        document: squeries.autocomplete, // this is the query string you just created
+        document: _sq, // this is the query string you just created
         variables: {
           'querystring': _searchText,
         },
@@ -141,7 +127,61 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
 
-              ;
+              
+            });
+      },
+    );
+
+        });
+      }
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _isSearching = false;
+
+    _sq = squeries.autocomplete.replaceFirst("querystring", "hamburger");
+
+    _query = Query(
+      options: QueryOptions(
+        document: _sq, // this is the query string you just created
+        variables: {
+          'querystring': _searchText,
+        },
+        pollInterval: 10,
+      ),
+      builder: (QueryResult result) {
+        if (result.errors != null) {
+          return Text(result.errors.toString());
+        }
+
+        if (result.loading) {
+          return Text('Loading...🕓');
+        }
+
+        // it can be either Map or List
+        List foodItems = result.data['outocomplete']['edges'];
+
+        return ListView.builder(
+            padding: EdgeInsets.all(5.0),
+            itemCount: foodItems.length,
+            itemBuilder: (context, index) {
+              final foodItem = foodItems[index];
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(foodItem['node']['name'],
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("Carbs: ${foodItem['node']['nutrients']['chocdf']} %"),
+                  ],
+                ),
+              );
             });
       },
     );
@@ -187,7 +227,46 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _isSearching = true;
       //_query.setSearchTerm();
-     // _query = _getQuery(_searchText);
+      _query = Query(
+      options: QueryOptions(
+        document: _sq, // this is the query string you just created
+        variables: {
+          'querystring': _searchText,
+        },
+        pollInterval: 10,
+      ),
+      builder: (QueryResult result) {
+        if (result.errors != null) {
+          return Text(result.errors.toString());
+        }
+
+        if (result.loading) {
+          return Text('Loading...🕓');
+        }
+
+        // it can be either Map or List
+        List foodItems = result.data['outocomplete']['edges'];
+
+        return ListView.builder(
+            padding: EdgeInsets.all(5.0),
+            itemCount: foodItems.length,
+            itemBuilder: (context, index) {
+              final foodItem = foodItems[index];
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(foodItem['node']['name'],
+                        style: TextStyle(fontWeight: FontWeight.w700)),
+                    Text("Carbs: ${foodItem['node']['nutrients']['chocdf']} %"),
+                  ],
+                ),
+              );
+            });
+      },
+    );
     });
   }
 
