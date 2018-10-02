@@ -58,8 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-  double width = MediaQuery.of(context).size.width;
-  double height = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.width;
 
     return Card(
       color: Colors.transparent,
@@ -80,22 +80,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: new BorderRadius.only(
                     topLeft: new Radius.circular(8.0),
                     topRight: new Radius.circular(8.0)),
-                image: img,
+                image: null,
               ),
             ),
             new Container(
-                width: screenSize.width / 1.2,
-                height: screenSize.height / 1.7 - screenSize.height / 2.2,
+                width: width / 1.2,
+                height: height / 1.7 - height / 2.2,
                 child: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    new SwipeButton(
-                      text: "NOPE",
-                      onClick: swipeLeft,
+                    RaisedButton(
+                      child: Text("nel pastel"),
+                      onPressed: () => print("auch"),
                     ),
-                    new SwipeButton(
-                      text: "LIKE",
-                      onClick: swipeRight,
+                    RaisedButton(
+                      child: Text("yeah bby"),
+                      onPressed: () => print("auch"),
                     ),
                   ],
                 ))
