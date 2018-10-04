@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
+
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -64,6 +66,23 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    String _batteryLevel = 'Unknown battery level.';
+
+    Future<Null> _getBatteryLevel() async {
+      String batteryLevel;
+      try {
+        final int result = await platform.invokeMethod('getBatteryLevel');
+        batteryLevel = 'Battery level at $result % .';
+      } on PlatformException catch (e) {
+        batteryLevel = "Failed to get battery level: '${e.message}'.";
+      }
+
+      setState(() {
+        _batteryLevel = batteryLevel;
+      });
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         // Here we take the value from the MyHomePage object that was created by
