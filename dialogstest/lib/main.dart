@@ -51,9 +51,13 @@ Widget bod(context) {
     child: SafeArea(
         child: Column(
       children: <Widget>[
-        Text("wtf"), 
-        FlatButton(child: Text("picalewe"),onPressed: () {_showDialog();})
-        ],
+        Text("wtf"),
+        FlatButton(
+            child: Text("picalewe"),
+            onPressed: () {
+              _showDialog();
+            })
+      ],
     )),
   ));
 }
