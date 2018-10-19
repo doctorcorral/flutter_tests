@@ -8,13 +8,13 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-  
         primarySwatch: Colors.blue,
       ),
-      home:  stfw(),
+      home: stfw(),
     );
   }
 }
+
 class stfw extends StatefulWidget {
   _nameState createState() => _nameState();
 }
@@ -23,14 +23,37 @@ class _nameState extends State<stfw> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: bod(),
+      child: bod(context),
     );
   }
 }
 
-Widget bod() {
-  return Scaffold( 
-     body: Container(
-     child: Text("wtf"),
+Widget bod(context) {
+  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text("dialogalert"),
+              content: Text("dialogcontent"),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text("cerrar"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    })
+              ]);
+        });
+  }
+
+  return Scaffold(
+      body: Container(
+    child: SafeArea(
+        child: Column(
+      children: <Widget>[
+        Text("wtf"), 
+        FlatButton(child: Text("picalewe"),onPressed: () {_showDialog();})
+        ],
+    )),
   ));
 }
