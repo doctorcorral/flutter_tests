@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(new MyApp());
 
@@ -33,8 +35,11 @@ Widget bod(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-              title: Text("dialogalert"),
+          return CupertinoAlertDialog(
+              title: Container(
+                  color: Colors.amber,
+                  padding: EdgeInsets.all(10.0),
+                  child: Text("dialogalert")),
               content: Text("dialogcontent"),
               actions: <Widget>[
                 FlatButton(
