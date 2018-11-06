@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      widgetslist.add(Text("otro item", style: TextStyle(fontSize: 25.0),));
+      widgetslist.add(Card(child: Text("otro item", style: TextStyle(fontSize: 25.0)),));
     });
   }
 
