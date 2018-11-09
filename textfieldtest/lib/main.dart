@@ -26,12 +26,13 @@ class _TextFielderState extends State<TextFielder> {
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: Column(
-         children: <Widget>[ 
+       child: SafeArea(
+          child: Column(
+      children: <Widget>[ 
            Text("Yaaay", style: TextStyle(fontSize: 34.0),),
            TextField(onChanged: (s) => print(s))
            ],
         
-    ));
+    )));
   }
 }
