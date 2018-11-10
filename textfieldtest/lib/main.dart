@@ -7,14 +7,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.grey,
-      ),
-      home:  Scaffold(body: TextFielder())
-      
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: new ThemeData(
+          primarySwatch: Colors.grey,
+        ),
+        home: Scaffold(body: TextFielder()));
   }
 }
 
@@ -23,16 +21,24 @@ class TextFielder extends StatefulWidget {
 }
 
 class _TextFielderState extends State<TextFielder> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: SafeArea(
-          child: Column(
-      children: <Widget>[ 
-           Text("Yaaay", style: TextStyle(fontSize: 34.0),),
-           TextField(onChanged: (s) => print(s))
-           ],
-        
+        child: SafeArea(
+            child: Column(
+      children: <Widget>[
+        Text(
+          "Yaaay",
+          style: TextStyle(fontSize: 34.0),
+        ),
+        TextField(
+            controller: controller,
+            onChanged: (val) {
+              print(controller.text);
+            })
+      ],
     )));
   }
 }
