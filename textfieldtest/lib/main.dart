@@ -22,7 +22,9 @@ class TextFielder extends StatefulWidget {
 
 class _TextFielderState extends State<TextFielder> {
   TextEditingController controller = TextEditingController();
-
+  FocusNode nodeOne = FocusNode();
+  FocusNode nodeTwo = FocusNode();
+  bool nodeOneOn = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,11 +36,35 @@ class _TextFielderState extends State<TextFielder> {
           style: TextStyle(fontSize: 34.0),
         ),
         TextField(
-            controller: controller,
-            onChanged: (val) {
-              print(controller.text);
-            },
-            onEditingComplete: () {print('Yeah ${controller.text}');})
+          autofocus: true,
+          focusNode: nodeOne,
+          controller: controller,
+          onChanged: (val) {
+            print(controller.text);
+          },
+          onEditingComplete: () {
+            print('Yeah ${controller.text}');
+          },
+          onSubmitted: (v) {
+            print('ahsuma $v');
+          },
+        ),
+        TextField(
+          focusNode: nodeTwo,
+          onEditingComplete: () {
+            print('Yeah ${controller.text}');
+          },
+          onSubmitted: (v) {
+            print('ahsuma $v');
+          },
+        ),
+        RaisedButton(
+          onPressed: () {
+            nodeOneOn = ! nodeOneOn;
+            FocusScope.of(context).requestFocus( nodeOneOn ? nodeOne : nodeTwo) ;
+          },
+          child: Text("cambia texto"),
+        )
       ],
     )));
   }
