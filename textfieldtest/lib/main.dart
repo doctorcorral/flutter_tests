@@ -37,7 +37,8 @@ class _TextFielderState extends State<TextFielder> {
             controller: controller,
             onChanged: (val) {
               print(controller.text);
-            })
+            },
+            onEditingComplete: () {print('Yeah ${controller.text}');})
       ],
     )));
   }
